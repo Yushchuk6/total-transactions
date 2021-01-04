@@ -35,34 +35,34 @@ func TestWeiToETH(t *testing.T) {
 	}
 }
 
-type UintHexTest struct {
+type BigIntHexTest struct {
 	num *big.Int
 	hex string
 }
 
-var uintHexTests = []UintHexTest{
+var bigIntHexTests = []BigIntHexTest{
 	{big.NewInt(0), "0x0"},
 	{big.NewInt(42), "0x2a"},
 	{big.NewInt(math.MaxInt64), "0x7fffffffffffffff"},
 }
 
 func TestBigIntToHex(t *testing.T) {
-	for _, test := range uintHexTests {
+	for _, test := range bigIntHexTests {
 		got := entity.BigIntToHex(test.num)
 		if got != test.hex {
-			t.Errorf("Error converting Uint to HEX, want %v got %v", test.hex, got)
+			t.Errorf("Error converting bigInt to HEX, want %v got %v", test.hex, got)
 		}
 	}
 }
 
 func TestHextoBigInt(t *testing.T) {
-	for _, test := range uintHexTests {
+	for _, test := range bigIntHexTests {
 		got, err := entity.HexToBigInt(test.hex)
 		if err != nil {
 			t.Error(err)
 		}
 		if !reflect.DeepEqual(got, test.num) {
-			t.Errorf("Error converting HEX to Uint, want %v got %v", test.num, got)
+			t.Errorf("Error converting HEX to bigInt, want %v got %v", test.num, got)
 		}
 	}
 }
